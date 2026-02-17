@@ -1,34 +1,24 @@
 # BigApples
 
-## Go live (static hosting)
-This site is a single `index.html` plus the `Assets/` folder, so it can be deployed anywhere that hosts static files.
+This repository answers the question: **"Rank order the programs or courses based on student ratings or preferences for the one-year MAcc exit survey dataset."**
 
-### 1) Update placeholders before deploying
-Open `index.html` and replace:
-- `PASTE_LEDGERSEDGE_LINK_HERE` with your real site URL.
-- `YOUR_EMAIL_HERE` with your email address.
+## Repository structure
+- `data/` – input dataset file(s), expected as `.xlsx` (preferred) or `.csv`
+- `src/` – analysis scripts (`preview.py`, `rank_order.py`)
+- `outputs/` – generated ranking outputs (`rank_order.csv`, `rank_order.png`)
+- `.github/workflows/` – GitHub Actions workflow for reproducible cloud execution
 
-### 2) Deploy options
-Pick one of the options below and follow the steps.
+## Run locally
+```bash
+pip install -r requirements.txt
+python src/preview.py
+python src/rank_order.py
+```
 
-#### GitHub Pages
-1. Push this repo to GitHub.
-2. In GitHub, go to **Settings → Pages**.
-3. Under **Build and deployment**, choose:
-   - **Source:** Deploy from a branch
-   - **Branch:** `main` (or the branch you pushed), **/ (root)**
-4. Save. GitHub will publish a URL like `https://<user>.github.io/<repo>/`.
+## Output location
+Generated files are written to:
+- `outputs/rank_order.csv`
+- `outputs/rank_order.png`
 
-#### Netlify
-1. Create a Netlify site from this GitHub repo (or drag-and-drop the folder).
-2. Build settings:
-   - **Build command:** (leave blank)
-   - **Publish directory:** `/` (root)
-3. Deploy and use the provided URL.
-
-#### Vercel
-1. Import the repo into Vercel.
-2. Framework preset: **Other**.
-3. Build command: none.
-4. Output directory: `.` (root).
-5. Deploy.
+## GitHub Actions
+The workflow at `.github/workflows/run_analysis.yml` runs automatically on pushes to `main` and can also be run manually using **workflow_dispatch**.
